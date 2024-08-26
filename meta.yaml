@@ -1,0 +1,41 @@
+{% set name = "django-sitetree" %}
+{% set version = "1.18.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/django-sitetree-{{ version }}.tar.gz
+  sha256: 11228c67f27a4243921b9473d4212a588714c0038698673073e564375640021e
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - django
+
+test:
+  imports:
+    - sitetree
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: http://github.com/idlesign/django-sitetree
+  summary: This reusable Django app introduces site tree, menu and breadcrumbs navigation elements
+  license: BSD-3-Clause
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - gb119
